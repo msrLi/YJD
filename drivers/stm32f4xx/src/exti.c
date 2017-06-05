@@ -1,5 +1,6 @@
 #include "exti.h"
 #include "debug.h"
+#include "parallel.h"
 extern void parallel_status_PeError();
 #define DEBUG
 extern int dbg_level;
@@ -28,6 +29,8 @@ void EXTI9_5_IRQHandler(void)
 			}
 		}
 		EXTI_ClearITPendingBit(EXTI_Line8);
+	}else{
+		printf("other irq is run ...\n");
 	}
 	//OSSemPost(g_sem_flag);
 }
@@ -36,9 +39,16 @@ void exti_init(void)
 {
 	NVIC_InitTypeDef   NVIC_InitStructure;
 	EXTI_InitTypeDef   EXTI_InitStructure;
-
+  GPIO_InitTypeDef  GPIO_InitStructure;
+	
 	p_info("%s comming", __FUNCTION__);
-
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 ;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOE, &GPIO_InitStructure);
+	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOE, EXTI_PinSource8);
 
@@ -53,7 +63,6 @@ void exti_init(void)
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03;//子优先级2
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;//使能外部中断通道
 	NVIC_Init(&NVIC_InitStructure);//配置
-	
 
 }
 

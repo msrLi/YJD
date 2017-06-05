@@ -60,7 +60,7 @@ extern "C" {
 
 YJ_S8 init_parallel(void);
 void parallel_status_write(YJ_U16 u16Type, YJ_BOOL bValue);
-
+YJ_U16 parallel_read(void);
 #ifdef __cplusplus
 }
 #endif

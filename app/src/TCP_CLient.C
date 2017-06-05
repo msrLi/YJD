@@ -8,7 +8,7 @@
 #include "main.h"
 /***************开发板ip定义*************************/
 
-char *BOARD_IP  	= "192.168.1.200";   		//开发板ip 
+char *BOARD_IP  	= "192.168.1.204";   		//开发板ip 
 char *BOARD_NETMASK = "255.255.255.0";   		//开发板子网掩码
 char *BOARD_WG		= "192.168.1.1";   		    //开发板子网关
 
@@ -28,6 +28,7 @@ int tcp_recv_len = 0;
 
 extern int mcuID[3];
 
+extern int TCP_Send_Data(int s,char *data,int len,int flags);
 
 /***********************************************************************
 函数名称：void ZQWL_W8782_IRQ_Handler(int socket, uint8_t *buff, int size)
@@ -51,7 +52,7 @@ void ZQWL_W8782_IRQ_Handler(int s, uint8_t *buff, int size,struct sockaddr remot
 			memcpy(tcp_recv_buff,buff,size);//复制数据
 			tcp_recv_flag = 1;
 			tcp_recv_len = size;
-			TCP_Send_Data(client_sock_fd,tcp_recv_buff,tcp_recv_len,MSG_DONTWAIT);//原样返回数据
+			// TCP_Send_Data(client_sock_fd,tcp_recv_buff,tcp_recv_len,MSG_DONTWAIT);//原样返回数据
 		}
 	}
 }
@@ -99,6 +100,7 @@ void Task_TCP_Client(void *pdata)
 	INT16U  send_len;
 	INT8U *send_buffer;
 	int 	ret;
+	static int wifi_time=0;
 	
 	//client_sock_fd = TCP_Link(TCP_SERVER_IP,TCP_SERVER_PORT);//向服务器发起连接
 	//while(client_sock_fd == -1)//一直连接 直到成功
@@ -138,11 +140,24 @@ void Task_TCP_Client(void *pdata)
 					*((YJ_U32*)(&u8Buf[22]))=ntohl(mcuID[2]);
 		 
 					client_sock_fd = TCP_Link(TCP_SERVER_IP,TCP_SERVER_PORT);//向服务器发起连接
+					wifi_time=0;
 					while(client_sock_fd == -1)//一直连接 直到成功
 					{
 						printf("TCP Linking...\n");  //
 						client_sock_fd = TCP_Link(TCP_SERVER_IP,TCP_SERVER_PORT);//向服务器发起连接
 						OSTimeDlyHMSM(0, 0, 0, 500);//
+						wifi_time++;
+						if(wifi_time >= 60*5)
+						{
+							NVIC_SystemReset();
+							/*
+							ret = Init_W8782();				//初始化WIFI芯片
+							Power_Mode(OFF_POWER_SAVE_MODE);	//不 进入省电模式，OFF_POWER_SAVE_MODE 为退出省电模式
+							Init_Lwip(); 					//初始化lwip协议栈，并初始化了板子的IP
+							ret = Wifi_Connect("yixiaoke","57018092");
+							OSTimeDlyHMSM(0, 0, 1, 500);
+							*/
+						}
 					}
 					sock = get_socket(client_sock_fd);
 					while(sock == NULL)
@@ -150,6 +165,7 @@ void Task_TCP_Client(void *pdata)
 						sock = get_socket(client_sock_fd);					
 						printf("get sock ...\n");
 						OSTimeDlyHMSM(0, 0, 0, 500);//
+
 					}
 					if(sock->conn->pcb.tcp->state == ESTABLISHED)//已经有连接
 					{
@@ -176,6 +192,7 @@ void Task_TCP_Client(void *pdata)
 						if (YJ_FAILURE == ret)
 						{
 							printf("???\n");
+							NVIC_SystemReset();
 						}
 						TCP_Unlink(client_sock_fd);
 					}

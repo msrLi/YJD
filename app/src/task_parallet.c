@@ -25,13 +25,35 @@ void task_parallet(void *pdata)
 		pblock->end = 0;
 	}
 
+	
 	//while (1)
 	//	OSTimeDly(1);
-  
+  //pblock->fst = 1;
 	while (1)
 	{
 		//OSSemPend(sem_udp_rec_flag,0,&err);
-		// pblock->fst = 1;
+		#if 0
+		memset(&pblock->u8Buf, 5, 6);
+		pblock->len = 1000;
+	  
+		#endif 
+		while( pblock == NULL)
+		{
+				pblock = (parallet_msg_t *)OSMemGet(g_hParalletRxMem, &err);
+				if (OS_NO_ERR == err)
+				{
+					memset(&pblock->u8Buf, 0, sizeof(pblock->u8Buf));
+					pblock->len = 0;
+					pblock->fst = 0;
+					pblock->end = 0;
+				}else{
+					pblock=(parallet_msg_t *) NULL;
+					printf("there is no enugouh mem to stroe the priter dates\n");
+				}		
+			 NVIC_SystemReset();
+			 OSTimeDly(10);
+		}
+		
 		if (pblock->fst != 0)
 		{
 			pblock->end = os_time_get();
@@ -51,7 +73,7 @@ void task_parallet(void *pdata)
 				}
 			}
 		}		
-		OSTimeDly(1);
+		OSTimeDly(10);
 	}
 }
 

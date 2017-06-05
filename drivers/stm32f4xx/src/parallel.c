@@ -110,7 +110,8 @@ static void sn74hc245u2_direction(YJ_S8	s8Flag)
 	else //mcu输入
 	{
 		//GPIOE10,11,12,13,14初始化设置: 上拉输入
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14;
+		//GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14;
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 ;
 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
 		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
@@ -167,9 +168,13 @@ static void init_sn74hc245u1(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;//上拉
 	GPIO_Init(GPIOE, &GPIO_InitStructure);
-
-	is_init_data_control_line(YJ_TRUE);
-	is_init_status_line(YJ_TRUE);
+	
+  GPIO_ResetBits(GPIOC,GPIO_Pin_7);
+	GPIO_ResetBits(GPIOC,GPIO_Pin_6);
+	GPIO_ResetBits(GPIOB,GPIO_Pin_11);
+	GPIO_ResetBits(GPIOE,GPIO_Pin_15);
+	// is_init_data_control_line(YJ_TRUE);
+	// is_init_status_line(YJ_TRUE);
 
 	set_data_control_direction(MCU_READ);
 	set_status_line_direction(MCU_READ);
