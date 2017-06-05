@@ -101,7 +101,16 @@ void Task_TCP_Client(void *pdata)
 	INT8U *send_buffer;
 	int 	ret;
 	static int wifi_time=0;
-	
+	//以下加入一个AP（路由器）
+	ret = Wifi_Connect("yixiaoke","57018092");
+	// ret = Wifi_Connect("TPGuest_1425","xwz145603");
+	//ret = Wifi_Connect("king","zhouyangdelaoer");//路由器名称和密码，该函数调用后，自动进入sta模式
+	if(ret == -1)
+	{
+		printf("Wifi_Connect faild!\n");
+		while(1);
+	}
+	printf("Wifi_Connect ok!\n");  //	
 	//client_sock_fd = TCP_Link(TCP_SERVER_IP,TCP_SERVER_PORT);//向服务器发起连接
 	//while(client_sock_fd == -1)//一直连接 直到成功
 	//{

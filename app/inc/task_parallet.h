@@ -1,6 +1,6 @@
 #ifndef __YJ_APP_INC_TASK_PARALLET_H_
 #define __YJ_APP_INC_TASK_PARALLET_H_
-
+#include "os_cpu.h"
 #define 	BUF_SIZE	(1024*2u)
 
 typedef struct _parallet_msg_t_

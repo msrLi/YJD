@@ -374,7 +374,7 @@
               <MiscControls></MiscControls>
               <Define>__FPU_PRESENT=1,ARM_MATH_CM4,STM32F4XX</Define>
               <Undefine></Undefine>
-              <IncludePath>..\bsp\stm32f4xx\FWlib4xx\inc;..\kernel\ucos\include;..\bsp\stm32f4xx\CMSIS\inc;..\net\lwip\src\include\ipv4;..\net\lwip\src\include;..\net\lwip\src\arch;..\net\lwip\src;..\kernel\api\inc;..\app\inc;..\jpeg\jpeg-9a;..\net\udhcp-0.9.8;..\libmad-0.15.1b;..\net\libertas\inc;..\net\wpa;..\net\wlan_src\mlan;..\net\wlan_src\mlinux;..\net\wlan_src\user;..\net\wlan_src\mapp;..\net\wlan_src\mapp\wifidirectutl;..\ZQWL_ETH_APP;..\app\inc;..\drivers\stm32f4xx\inc</IncludePath>
+              <IncludePath>..\bsp\stm32f4xx\FWlib4xx\inc;..\kernel\ucos\include;..\bsp\stm32f4xx\CMSIS\inc;..\net\lwip\src\include\ipv4;..\net\lwip\src\include;..\net\lwip\src\arch;..\net\lwip\src;..\kernel\api\inc;..\app\inc;..\jpeg\jpeg-9a;..\net\udhcp-0.9.8;..\libmad-0.15.1b;..\net\libertas\inc;..\net\wpa;..\net\wlan_src\mlan;..\net\wlan_src\mlinux;..\net\wlan_src\user;..\net\wlan_src\mapp;..\net\wlan_src\mapp\wifidirectutl;..\ZQWL_ETH_APP;..\app\inc;..\drivers\stm32f4xx\inc;..\net\lwip\src\include\lwip\arch</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

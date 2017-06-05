@@ -5,6 +5,7 @@
 #define __LWIP_DHCP_H__
 
 #include "lwip/opt.h"
+#include "cc.h"
 
 #if LWIP_DHCP /* don't build if not configured for use in lwipopts.h */
 

@@ -34,6 +34,7 @@
 
 #include "lwip/opt.h"
 #include "lwip/def.h"
+#include "cc.h"
 
 #ifdef __cplusplus
 extern "C" {

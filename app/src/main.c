@@ -38,29 +38,7 @@ void iwdg_init(void)
 ***********************************************************************/
 void Init_Wifi(void)
 {
-	int ret;
-	u32_t addr;
-	ZQWL_System_Clock_Init(); 		//初始化时钟
-	OSStatInit(); 					//初始化UCOS状态，必须在初始化时钟之后调用
-	USART_Configuration(); 			//初始化串口
-	ret = SD_Init();    			//初始化SDIO设备
-	if (ret != 0)					//如果失败
-	{
-		printf("SD_Init faild!\n"); //
-		GPIO_SetBits(GPIOC,GPIO_Pin_4);
-		while(1);					//程序停止运行
-	}
-	ret = Init_W8782();				//初始化WIFI芯片
-	if(ret != 0)					//如果失败
-	{
-		printf("init wifi faild!\n");  
-		GPIO_SetBits(GPIOC,GPIO_Pin_4);
-		while(1);					//程序停止运行
-	}
-	printf("Init_W8782 ok!\n");  
-	Power_Mode(OFF_POWER_SAVE_MODE);	//不 进入省电模式，OFF_POWER_SAVE_MODE 为退出省电模式
-	Init_Lwip(); 					//初始化lwip协议栈，并初始化了板子的IP
-
+	int ret = -1;
 #if USE_DHCP
 	Auto_Get_IP(3);
 #endif
@@ -160,8 +138,30 @@ void cpuidGetId(void)
 void main_thread(void *pdata)
 {
 	INT8U u8Err;
+	int ret = -1;
+	// u32_t addr;
+	ZQWL_System_Clock_Init(); 		//初始化时钟
+	OSStatInit(); 					//初始化UCOS状态，必须在初始化时钟之后调用
+	USART_Configuration(); 			//初始化串口
+	ret = SD_Init();    			//初始化SDIO设备
+	if (ret != 0)					//如果失败
+	{
+		printf("SD_Init faild!\n"); //
+		GPIO_SetBits(GPIOC,GPIO_Pin_4);
+		while(1);					//程序停止运行
+	}
+	ret = Init_W8782();				//初始化WIFI芯片
+	if(ret != 0)					//如果失败
+	{
+		printf("init wifi faild!\n");  
+		GPIO_SetBits(GPIOC,GPIO_Pin_4);
+		while(1);					//程序停止运行
+	}
+	printf("Init_W8782 ok!\n");  
+	Power_Mode(OFF_POWER_SAVE_MODE);	//不 进入省电模式，OFF_POWER_SAVE_MODE 为退出省电模式
+	Init_Lwip(); 					//初始化lwip协议栈，并初始化了板子的IP
 	
-	Init_Wifi();
+	// Init_Wifi();
 	
 	cpuidGetId();
 	printf("CPUID IS 0x%8X %8X %8X.\r\n", mcuID[0], mcuID[1], mcuID[2] );
