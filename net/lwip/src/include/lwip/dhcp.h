@@ -70,7 +70,7 @@ struct dhcp
 #ifdef PACK_STRUCT_USE_INCLUDES
 #  include "lwip/arch/bpstruct.h"
 #endif
-PACK_STRUCT_BEGIN
+// PACK_STRUCT_BEGIN
 /** minimum set of fields of any DHCP message */
 struct dhcp_msg
 {

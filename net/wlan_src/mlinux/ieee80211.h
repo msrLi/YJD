@@ -624,48 +624,48 @@ struct ieee80211_rann_ie {
 
 #define WLAN_SA_QUERY_TR_ID_LEN 2
 
-__packed struct ieee80211_mgmt {
+ struct ieee80211_mgmt {
 	__le16 frame_control;
 	__le16 duration;
 	u8 da[6];
 	u8 sa[6];
 	u8 bssid[6];
 	__le16 seq_ctrl;
-	__packed union {
-		__packed struct {
+	 union {
+		 struct {
 			__le16 auth_alg;
 			__le16 auth_transaction;
 			__le16 status_code;
 			/* possibly followed by Challenge text */
 			u8 variable[ZEROSIZE];
 		} auth;
-		__packed struct {
+		 struct {
 			__le16 reason_code;
 		} deauth;
-		__packed struct {
+		 struct {
 			__le16 capab_info;
 			__le16 listen_interval;
 			/* followed by SSID and Supported rates */
 			u8 variable[ZEROSIZE];
 		} assoc_req;
-		__packed struct {
+		 struct {
 			__le16 capab_info;
 			__le16 status_code;
 			__le16 aid;
 			/* followed by Supported rates */
 			u8 variable[ZEROSIZE];
 		} assoc_resp, reassoc_resp;
-		__packed struct {
+		 struct {
 			__le16 capab_info;
 			__le16 listen_interval;
 			u8 current_ap[6];
 			/* followed by SSID and Supported rates */
 			u8 variable[ZEROSIZE];
 		} reassoc_req;
-		__packed struct {
+		 struct {
 			__le16 reason_code;
 		}disassoc;
-		__packed struct {
+		 struct {
 			__le64 timestamp;
 			__le16 beacon_int;
 			__le16 capab_info;
@@ -673,11 +673,11 @@ __packed struct ieee80211_mgmt {
 			 * FH Params, DS Params, CF Params, IBSS Params, TIM */
 			u8 variable[ZEROSIZE];
 		} beacon;
-		__packed struct {
+		 struct {
 			/* only variable items: SSID, Supported rates */
 			u8 variable[ZEROSIZE];
 		} probe_req;
-		__packed struct {
+		 struct {
 			__le64 timestamp;
 			__le16 beacon_int;
 			__le16 capab_info;
@@ -685,48 +685,48 @@ __packed struct ieee80211_mgmt {
 			 * FH Params, DS Params, CF Params, IBSS Params */
 			u8 variable[ZEROSIZE];
 		} probe_resp;
-		__packed struct {
+		 struct {
 			u8 category;
-			__packed union {
-				__packed struct {
+			 union {
+				 struct {
 					u8 action_code;
 					u8 dialog_token;
 					u8 status_code;
 					u8 variable[ZEROSIZE];
 				} wme_action;
-				__packed struct{
+				 struct{
 					u8 action_code;
 					u8 element_id;
 					u8 length;
 					struct ieee80211_channel_sw_ie sw_elem;
 				} chan_switch;
-				__packed struct{
+				 struct{
 					u8 action_code;
 					u8 dialog_token;
 					u8 element_id;
 					u8 length;
 					struct ieee80211_msrment_ie msr_elem;
 				} measurement;
-				__packed struct{
+				 struct{
 					u8 action_code;
 					u8 dialog_token;
 					__le16 capab;
 					__le16 timeout;
 					__le16 start_seq_num;
 				} addba_req;
-				__packed struct{
+				 struct{
 					u8 action_code;
 					u8 dialog_token;
 					__le16 status;
 					__le16 capab;
 					__le16 timeout;
 				} addba_resp;
-				__packed struct{
+				 struct{
 					u8 action_code;
 					__le16 params;
 					__le16 reason_code;
 				} delba;
-				__packed struct{
+				 struct{
 					u8 action_code;
 					/* capab_info for open and confirm,
 					 * reason for close
@@ -739,15 +739,15 @@ __packed struct ieee80211_mgmt {
 					 */
 					u8 variable[ZEROSIZE];
 				} plink_action;
-				__packed struct{
+				 struct{
 					u8 action_code;
 					u8 variable[ZEROSIZE];
 				} mesh_action;
-				__packed struct {
+				 struct {
 					u8 action;
 					u8 trans_id[WLAN_SA_QUERY_TR_ID_LEN];
 				} sa_query;
-				__packed struct {
+				 struct {
 					u8 action;
 					u8 smps_control;
 				} ht_smps;
@@ -761,7 +761,7 @@ __packed struct ieee80211_mgmt {
 
 
 /* Management MIC information element (IEEE 802.11w) */
-__packed struct ieee80211_mmie {
+ struct ieee80211_mmie {
 	u8 element_id;
 	u8 length;
 	__le16 key_id;
@@ -770,20 +770,20 @@ __packed struct ieee80211_mmie {
 };
 
 /* Control frames */
-__packed struct ieee80211_rts {
+ struct ieee80211_rts {
 	__le16 frame_control;
 	__le16 duration;
 	u8 ra[6];
 	u8 ta[6];
 } ;
 
-__packed struct ieee80211_cts {
+ struct ieee80211_cts {
 	__le16 frame_control;
 	__le16 duration;
 	u8 ra[6];
 } ;
 
-__packed struct ieee80211_pspoll {
+ struct ieee80211_pspoll {
 	__le16 frame_control;
 	__le16 aid;
 	u8 bssid[6];
@@ -796,7 +796,7 @@ __packed struct ieee80211_pspoll {
  * This structure refers to "HT BlockAckReq" as
  * described in 802.11n draft section 7.2.1.7.1
  */
-__packed struct ieee80211_bar {
+ struct ieee80211_bar {
 	__le16 frame_control;
 	__le16 duration;
 	__u8 ra[6];
@@ -977,7 +977,7 @@ struct ieee80211_mcs_info {
 	__le16 rx_highest;
 	u8 tx_params;
 	u8 reserved[3];
-} __packed;
+} ;
 /**
  * struct ieee80211_sta_ht_cap - STA's HT capabilities
  *
@@ -1030,7 +1030,7 @@ struct ieee80211_supported_band {
  * This structure is the "HT capabilities element" as
  * described in 802.11n D5.0 7.3.2.57
  */
-__packed struct ieee80211_ht_cap {
+struct  ieee80211_ht_cap {
 	__le16 cap_info;
 	u8 ampdu_params_info;
 
@@ -1564,14 +1564,14 @@ struct ieee80211_country_ie_triplet {
 			u8 first_channel;
 			u8 num_channels;
 			s8 max_power;
-		}__packed chans;
+		} chans;
 		 struct {
 			u8 reg_extension_id;
 			u8 reg_class;
 			u8 coverage_class;
-		}__packed ext;
-	}__packed value;
-}__packed;
+		} ext;
+	} value;
+};
 
 enum ieee80211_timeout_interval_type {
 	WLAN_TIMEOUT_REASSOC_DEADLINE = 1 /* 802.11r */,

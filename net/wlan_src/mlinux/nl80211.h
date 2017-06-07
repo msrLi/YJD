@@ -1320,7 +1320,7 @@ enum nl80211_sta_flags {
 struct nl80211_sta_flag_update {
 	__u32 mask;
 	__u32 set;
-} __attribute__((packed));
+} ;
 
 /**
  * enum nl80211_rate_info - bitrate information
@@ -2221,7 +2221,7 @@ struct nl80211_wowlan_pattern_support {
 	__u32 max_patterns;
 	__u32 min_pattern_len;
 	__u32 max_pattern_len;
-} __attribute__((packed));
+} ;
 
 /**
  * enum nl80211_wowlan_triggers - WoWLAN trigger definitions

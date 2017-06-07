@@ -168,7 +168,7 @@ typedef u64 __bitwise le64;
 #define be_to_host64(n) bswap_64((__force u64) (be64) (n))
 #define host_to_be64(n) ((__force be64) bswap_64((n)))
 
-#define STRUCT_PACKED  __packed
+#define STRUCT_PACKED  
 
 #define MAX_SSID_LEN 32
 
@@ -894,8 +894,8 @@ struct wpa_ptk {
 		struct {
 			u8 tx_mic_key[8];
 			u8 rx_mic_key[8];
-		}__packed auth;
-	}__packed u;
+		} auth;
+	} u;
 } STRUCT_PACKED;
 
 struct wpa_ie_hdr {

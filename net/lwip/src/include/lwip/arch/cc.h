@@ -19,9 +19,9 @@ typedef u32_t mem_ptr_t;
 
 
 /* ½á¹¹Ìå */
-#define PACK_STRUCT_FIELD(x) __packed x 
+#define PACK_STRUCT_FIELD(x)  x 
 #define PACK_STRUCT_STRUCT	
-#define PACK_STRUCT_BEGIN 	 __packed
+#define PACK_STRUCT_BEGIN 	 
 #define PACK_STRUCT_END
 
 

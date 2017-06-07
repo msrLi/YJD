@@ -98,7 +98,7 @@ struct scan_result_data{
 	uint8_t 	essid_len;
 	uint8_t 	essid[32];  		// essid
 	uint8_t 	bssid[6];  			//macµÿ÷∑
-}__packed;
+};
 
 
 #define PACKET_HOST		0		/* To us		*/

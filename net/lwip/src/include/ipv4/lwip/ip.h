@@ -112,7 +112,7 @@ struct ip_pcb {
 #ifdef PACK_STRUCT_USE_INCLUDES
 #  include "lwip/arch/bpstruct.h"
 #endif
-PACK_STRUCT_BEGIN
+//PACK_STRUCT_BEGIN
 struct ip_hdr {
   /* version / header length */
   PACK_STRUCT_FIELD(u8_t _v_hl);

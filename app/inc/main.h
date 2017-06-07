@@ -10,6 +10,7 @@
 #define _MAIN_H_
 
 #include "misc.h"
+#include "stm32f4xx.h"
 #include "stm32f4xx_dma.h"
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_gpio.h"
@@ -69,13 +70,16 @@ void delay_1us(void);
 void delay_us(uint32_t us);
 void Init_Wifi(void);
 
-#define		MAX_QUE		8
+#define		MAX_QUE		12
 #define		MEM_PART	MAX_QUE
 
 extern HANDLER	hParalletMsgQueue;
 extern void *g_qMsgIntTb1[MAX_QUE];
 
 extern OS_MEM	*g_hParalletRxMem;
+extern OS_MEM  *g_hParalletNewRxMem;
+extern OS_MEM *g_hParalletHeadMem;
+
 extern INT8U MemPart[MEM_PART][BUF_SIZE];
 extern OS_EVENT  *g_sem_flag;
 

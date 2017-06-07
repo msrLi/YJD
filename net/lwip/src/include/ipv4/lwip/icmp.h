@@ -75,7 +75,7 @@ enum icmp_te_type {
  *  This header is also used for other ICMP types that do not
  *  use the data part.
  */
-PACK_STRUCT_BEGIN
+//PACK_STRUCT_BEGIN
 struct icmp_echo_hdr {
   PACK_STRUCT_FIELD(u8_t type);
   PACK_STRUCT_FIELD(u8_t code);

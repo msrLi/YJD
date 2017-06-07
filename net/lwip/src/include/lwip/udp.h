@@ -51,7 +51,7 @@ extern "C" {
 #ifdef PACK_STRUCT_USE_INCLUDES
 #  include "lwip/arch/bpstruct.h"
 #endif
-PACK_STRUCT_BEGIN
+//PACK_STRUCT_BEGIN
 struct udp_hdr {
   PACK_STRUCT_FIELD(u16_t src);
   PACK_STRUCT_FIELD(u16_t dest);  /* src/dest UDP ports */

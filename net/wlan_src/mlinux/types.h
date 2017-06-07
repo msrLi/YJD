@@ -9,15 +9,15 @@
 
 #define DECLARE_SSID_BUF(var) char var[IEEE80211_MAX_SSID_LEN * 4 + 1]
 
-struct __una_u16 { u16 x; } __packed ;
-struct __una_u32 { u32 x; } __packed ;
-struct __una_u64 { u64 x; } __packed ;
+struct __una_u16 { u16 x; }  ;
+struct __una_u32 { u32 x; }  ;
+struct __una_u64 { u64 x; }  ;
 
 
  struct ieee_ie_header {
 	u8 id;
 	u8 len;
-}__packed ;
+} ;
 
  struct ieee_ie_cf_param_set {
 	struct ieee_ie_header header;
@@ -26,19 +26,19 @@ struct __una_u64 { u64 x; } __packed ;
 	u8 cfpperiod;
 	__le16 cfpmaxduration;
 	__le16 cfpdurationremaining;
-}__packed ;
+} ;
 
 
  struct ieee_ie_ibss_param_set {
 	struct ieee_ie_header header;
 
 	__le16 atimwindow;
-}__packed ;
+} ;
 
  union ieee_ss_param_set {
 	struct ieee_ie_cf_param_set cf;
 	struct ieee_ie_ibss_param_set ibss;
-}__packed ;
+} ;
 
  struct ieee_ie_fh_param_set {
 	struct ieee_ie_header header;
@@ -47,18 +47,18 @@ struct __una_u64 { u64 x; } __packed ;
 	u8 hopset;
 	u8 hoppattern;
 	u8 hopindex;
-}__packed ;
+} ;
 
  struct ieee_ie_ds_param_set {
 	struct ieee_ie_header header;
 
 	u8 channel;
-}__packed ;
+} ;
 
  union ieee_phy_param_set {
 	struct ieee_ie_fh_param_set fh;
 	struct ieee_ie_ds_param_set ds;
-}__packed ;
+} ;
 
 /* TLV  type ID definition */
 #define PROPRIETARY_TLV_BASE_ID		0x0100
@@ -106,28 +106,28 @@ struct __una_u64 { u64 x; } __packed ;
  struct mrvl_ie_header {
 	__le16 type;
 	__le16 len;
-}__packed ;
+} ;
 
  struct mrvl_ie_data {
 	struct mrvl_ie_header header;
 	u8 Data[1];
-} __packed;
+} ;
 
  struct mrvl_ie_rates_param_set {
 	struct mrvl_ie_header header;
 	u8 rates[1];
-}__packed ;
+} ;
 
  struct mrvl_ie_ssid_param_set {
 	struct mrvl_ie_header header;
 	u8 ssid[1];
-} __packed;
+} ;
 
  struct mrvl_ie_wildcard_ssid_param_set {
 	struct mrvl_ie_header header;
 	u8 MaxSsidlength;
 	u8 ssid[1];
-}__packed ;
+} ;
 
  struct chanscanmode {
 #ifdef __BIG_ENDIAN_BITFIELD
@@ -139,7 +139,7 @@ struct __una_u64 { u64 x; } __packed ;
 	u8 disablechanfilt:1;
 	u8 reserved_2_7:6;
 #endif
-} __packed;
+} ;
 
  struct chanscanparamset {
 	u8 radiotype;
@@ -147,12 +147,12 @@ struct __una_u64 { u64 x; } __packed ;
 	struct chanscanmode chanscanmode;
 	__le16 minscantime;
 	__le16 maxscantime;
-}__packed ;
+} ;
 
 struct mrvl_ie_chanlist_param_set {
 	struct mrvl_ie_header header;
 	struct chanscanparamset chanscanparam[1];
-}__packed  ;
+}  ;
 
  struct mrvl_ie_cf_param_set {
 	struct mrvl_ie_header header;
@@ -160,86 +160,86 @@ struct mrvl_ie_chanlist_param_set {
 	u8 cfpperiod;
 	__le16 cfpmaxduration;
 	__le16 cfpdurationremaining;
-}__packed ;
+} ;
 
 struct mrvl_ie_ds_param_set {
 	struct mrvl_ie_header header;
 	u8 channel;
-}__packed ;
+} ;
 
  struct mrvl_ie_rsn_param_set {
 	struct mrvl_ie_header header;
 	u8 rsnie[1];
-}__packed  ;
+}  ;
 
  struct mrvl_ie_tsf_timestamp {
 	struct mrvl_ie_header header;
 	__le64 tsftable[1];
-}__packed ;
+} ;
 
 /* v9 and later firmware only */
  struct mrvl_ie_auth_type {
 	struct mrvl_ie_header header;
 	__le16 auth;
-}__packed ;
+} ;
 
 /*  Local Power capability */
  struct mrvl_ie_power_capability {
 	struct mrvl_ie_header header;
 	s8 minpower;
 	s8 maxpower;
-}__packed ;
+} ;
 
 /* used in CMD_802_11_SUBSCRIBE_EVENT for SNR, RSSI and Failure */
  struct mrvl_ie_thresholds {
 	struct mrvl_ie_header header;
 	u8 value;
 	u8 freq;
-}__packed ;
+} ;
 
  struct mrvl_ie_beacons_missed {
 	struct mrvl_ie_header header;
 	u8 beaconmissed;
 	u8 reserved;
-}__packed ;
+} ;
 
  struct mrvl_ie_num_probes {
 	struct mrvl_ie_header header;
 	__le16 numprobes;
-}__packed ;
+} ;
 
  struct mrvl_ie_bcast_probe {
 	struct mrvl_ie_header header;
 	__le16 bcastprobe;
-}__packed ;
+} ;
 
  struct mrvl_ie_num_ssid_probe {
 	struct mrvl_ie_header header;
 	__le16 numssidprobe;
-}__packed ;
+} ;
 
 struct led_pin {
 	u8 led;
 	u8 pin;
-}__packed;
+};
 
  struct mrvl_ie_ledgpio {
 	struct mrvl_ie_header header;
 	struct led_pin ledpin[1];
-}__packed ;
+} ;
 
  struct led_bhv {
 	uint8_t	firmwarestate;
 	uint8_t	led;
 	uint8_t	ledstate;
 	uint8_t	ledarg;
-}__packed ;
+} ;
 
 
  struct mrvl_ie_ledbhv {
 	struct mrvl_ie_header header;
 	struct led_bhv ledbhv[1];
-}__packed ;
+} ;
 
 /*
  * Meant to be packed as the value member of a struct ieee80211_info_element.
@@ -256,12 +256,12 @@ struct led_pin {
 	uint8_t mesh_capability;
 	uint8_t mesh_id_len;
 	uint8_t mesh_id[IEEE80211_MAX_SSID_LEN];
-}__packed ;
+} ;
 
  struct mrvl_meshie {
 	u8 id, len;
 	struct mrvl_meshie_val val;
-}__packed ;
+} ;
 
  struct mrvl_mesh_defaults {
 	__le32 bootflag;
@@ -269,6 +269,6 @@ struct led_pin {
 	uint8_t reserved;
 	__le16 channel;
 	struct mrvl_meshie meshie;
-}__packed ;
+} ;
 
 #endif

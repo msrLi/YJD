@@ -107,7 +107,7 @@ typedef enum
 typedef unsigned gfp_t;
 typedef unsigned fmode_t;
 
-#define __packed	__attribute__((packed))
+
 
 #define false 0
 #define true  1

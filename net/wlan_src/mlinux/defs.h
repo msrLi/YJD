@@ -214,11 +214,11 @@ extern unsigned int lbs_debug;
  *	This is an Ethernet frame header.
  */
 
-struct ethhdr {
+struct  ethhdr {
 	unsigned char	h_dest[ETH_ALEN];	/* destination eth addr	*/
 	unsigned char	h_source[ETH_ALEN];	/* source ether addr	*/
 	__be16		h_proto;		/* packet type ID field	*/
-} __packed;
+} ;
 
 
 //#ifdef DEBUG
@@ -274,7 +274,6 @@ do { if ((lbs_debug & (grp)) == (grp)) \
 #define le64_to_cpu(v64) (v64)
 
 
-#define __packed			__attribute__((packed))
 
 
 #define os_memset memset
